@@ -1,0 +1,27 @@
+<h1>Listing Movies</h1>
+
+<h3><%= link_to 'New Movie', new_movie_path %></h3>
+   
+    <% @movies.each do |movie| %>
+      <div class="col-sm-6 col-md-2">
+        <div class="thumbnail thumb-box" style="height:350px; width:250px">
+          <h2 style="text-align: center;"><%= movie.title%></h2>
+          <%= image_tag( movie.image ,width:'150px',height:'200px')%>
+          <div class="caption" style="text-align:center;">
+            <%= link_to like_movie_path(movie), class: "like",method: :put do%>
+              <button type="button" class ="btn btn-primary" aria-label="Left Align">
+                <span class="glyphicon glyphicon-thumbs-up glyphicon-align-center" aria-hidden="true"></span>
+                <span class="badge"><%= movie.get_upvotes.size %></span>
+              </button>
+            <% end %>
+            <%= link_to unlike_movie_path(movie), class: "like",method: :put do%>
+              <button type="button" class ="btn btn-primary" aria-label="Left Align">
+                <span class="glyphicon glyphicon-thumbs-down glyphicon-align-center" aria-hidden="true"></span>
+                <span class="badge"><%= movie.get_downvotes.size %></span>
+              </button>
+            <% end %>
+          </div>
+        </div>
+      </div>
+    <% end %>
+
